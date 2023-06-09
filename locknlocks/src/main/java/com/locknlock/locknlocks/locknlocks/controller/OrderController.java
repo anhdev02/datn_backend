@@ -1,8 +1,10 @@
 package com.locknlock.locknlocks.locknlocks.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.locknlock.locknlocks.locknlocks.model.Order;
 import com.locknlock.locknlocks.locknlocks.repository.OrderRepository;
@@ -56,6 +59,18 @@ public class OrderController {
 	@GetMapping("list")
 	public List<Order> getListOrder() {
 		return orderService.getListOrder();
+	}
+	
+	@GetMapping("date")
+	public List<Order> getListOrderByDate(@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
+            @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
+		return orderService.getListOrderByDate(startDate, endDate);
+	}
+	
+	@GetMapping("all")
+	public List<Order> getAllOrder(@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
+            @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
+		return orderService.getAllOrder(startDate, endDate);
 	}
 	
 	@GetMapping("confirm")

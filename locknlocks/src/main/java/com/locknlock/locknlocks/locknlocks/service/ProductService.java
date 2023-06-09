@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.locknlock.locknlocks.locknlocks.dto.BestSellerProducts;
 import com.locknlock.locknlocks.locknlocks.model.Product;
 import com.locknlock.locknlocks.locknlocks.repository.ProductRepository;
 @Service
@@ -22,7 +24,7 @@ public class ProductService {
     	return productRepository.findDealHotProducts(limit);
     }
 	
-	public List<Product> getBestSellerProducts(Integer limit) {
+	public List<BestSellerProducts> getBestSellerProducts(Integer limit) {
     	return productRepository.findBestSellerProducts(limit);
     }
 	

@@ -1,5 +1,6 @@
 package com.locknlock.locknlocks.locknlocks.controller;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.locknlock.locknlocks.locknlocks.model.ERole;
 import com.locknlock.locknlocks.locknlocks.model.Role;
@@ -51,6 +54,11 @@ public class UserController {
 		return userService.getUserById(userId);
 	}
 	
+	@GetMapping("role")
+	public List<User> getByRoles_Name() {
+		return userService.getByRoles_Name();
+	}
+	
 	@GetMapping("email/{email}")
 	public User getUserByEmail(@PathVariable(value="email") String email) {
 		return userService.getUserByEmail(email);
@@ -59,6 +67,12 @@ public class UserController {
 	@GetMapping("list")
 	public List<User> getListUser() {
 		return this.userService.getListUser();
+	}
+	
+	@GetMapping("date")
+	public List<User> getListUserByDate(@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
+            @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
+		return this.userService.getListUserByDate(startDate, endDate);
 	}
 	
 	@GetMapping("trash")

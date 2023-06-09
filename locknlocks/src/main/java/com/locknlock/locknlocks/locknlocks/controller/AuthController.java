@@ -33,6 +33,7 @@ import com.locknlock.locknlocks.locknlocks.repository.RoleRepository;
 import com.locknlock.locknlocks.locknlocks.repository.UserRepository;
 import com.locknlock.locknlocks.locknlocks.security.jwt.JwtUtils;
 import com.locknlock.locknlocks.locknlocks.security.services.UserDetailsImpl;
+import com.locknlock.locknlocks.locknlocks.service.EmailSenderService;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -56,7 +57,7 @@ public class AuthController {
 	JwtUtils jwtUtils;
 	
 	@Autowired
-	private com.locknlock.locknlocks.locknlocks.service.EmailSenderService emailSenderService;
+	private EmailSenderService emailSenderService;
 	
 	@PostMapping("/send-email")
 	public String sendMail(@RequestBody Email email) throws Exception {
@@ -101,7 +102,7 @@ public class AuthController {
 		    return response;
 		}
 		
-		if (userRepository.existsByPhone(signUpRequest.getEmail())) {
+		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
 			response.put("status", false);
 		    response.put("message", "Email đã tồn tại!");
 		    return response;

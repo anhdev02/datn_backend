@@ -1,10 +1,10 @@
 package com.locknlock.locknlocks.locknlocks.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.locknlock.locknlocks.locknlocks.model.User;
 import com.locknlock.locknlocks.locknlocks.repository.UserRepository;
 
@@ -18,6 +18,10 @@ public class UserService {
     	return userRepository.findUserById(id);
     }
     
+    public List<User> getByRoles_Name(){
+    	return userRepository.findByRoles_Name();
+    }
+    
     public User getUserByEmail(String email) {
     	return userRepository.findUserByEmail(email);
     }
@@ -25,6 +29,11 @@ public class UserService {
     public List<User> getListUser() {
     	return userRepository.findListUser();
     }
+    
+    public List<User> getListUserByDate(LocalDate startDate, LocalDate endDate) {
+    	return userRepository.findListUserByDate(startDate, endDate);
+    }
+    
     public List<User> getTrashUser() {
     	return userRepository.findTrashUser();
     }

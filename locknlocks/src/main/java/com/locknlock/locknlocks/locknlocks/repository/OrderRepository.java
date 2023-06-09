@@ -1,5 +1,6 @@
 package com.locknlock.locknlocks.locknlocks.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -42,9 +43,26 @@ public interface OrderRepository extends JpaRepository<Order, Long>{
 	@Query(value = "SELECT * "
 			+ "FROM orders "
 			+ "WHERE confirm = false "
-			+ "and trash = false "
+			+ "AND trash = false "
 			+ "ORDER BY id DESC", nativeQuery = true)
 	List<Order> findListOrder();
+	
+	@Query(value = "SELECT * "
+			+ "FROM orders "
+			+ "WHERE confirm = false "
+			+ "AND trash = false "
+			+ "AND order_date >= :startDate "
+			+ "AND order_date <= :endDate "
+			+ "ORDER BY id DESC", nativeQuery = true)
+	List<Order> findListOrderByDate(LocalDate startDate, LocalDate endDate);
+	
+	@Query(value = "SELECT * "
+			+ "FROM orders "
+			+ "WHERE trash = false "
+			+ "AND order_date >= :startDate "
+			+ "AND order_date <= :endDate "
+			+ "ORDER BY id DESC", nativeQuery = true)
+	List<Order> findAllOrder(LocalDate startDate, LocalDate endDate);
 	
 	@Query(value = "SELECT * "
 			+ "FROM orders "

@@ -29,6 +29,9 @@ public class Product {
 	@Column(name="image")
 	private String image;
 	
+	@Column(name = "import_price")
+	private BigDecimal importPrice;
+	
 	@Column(name = "price")
 	private BigDecimal price;
 	
@@ -101,6 +104,14 @@ public class Product {
 		this.image = image;
 	}
 
+	public BigDecimal getImportPrice() {
+		return importPrice;
+	}
+
+	public void setImportPrice(BigDecimal importPrice) {
+		this.importPrice = importPrice;
+	}
+
 	public BigDecimal getPrice() {
 		return price;
 	}
@@ -156,5 +167,7 @@ public class Product {
 	public void setTrash(Boolean trash) {
 		this.trash = trash;
 	}
+	
+	
 
 }

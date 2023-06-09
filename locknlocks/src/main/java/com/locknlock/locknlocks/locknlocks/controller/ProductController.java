@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.locknlock.locknlocks.locknlocks.dto.BestSellerProducts;
 import com.locknlock.locknlocks.locknlocks.model.Product;
 import com.locknlock.locknlocks.locknlocks.service.ProductService;
 
@@ -47,7 +49,7 @@ public class ProductController {
 	}
 	
 	@GetMapping("bestseller/{limit}")
-	public List<Product> getBestSellerProducts(@PathVariable(value = "limit")Integer limit) {
+	public List<BestSellerProducts> getBestSellerProducts(@PathVariable(value = "limit")Integer limit) {
 		return productService.getBestSellerProducts(limit);
 	}
 	
@@ -147,6 +149,7 @@ public class ProductController {
 			product.setCategoryId(productDetail.getCategoryId());
 			product.setBannerId(productDetail.getBannerId());
 			product.setImage(productDetail.getImage());
+			product.setImportPrice(productDetail.getImportPrice());
 			product.setPrice(productDetail.getPrice());
 			product.setSale(productDetail.getSale());
 			product.setDetailImage(productDetail.getDetailImage());

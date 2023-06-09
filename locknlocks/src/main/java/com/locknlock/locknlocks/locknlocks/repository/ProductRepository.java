@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import com.locknlock.locknlocks.locknlocks.dto.BestSellerProducts;
 import com.locknlock.locknlocks.locknlocks.model.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long>{
@@ -36,27 +38,27 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	
 	@Query(value = "SELECT "
 			+ "p.id, "
-			+ "p.product_name, "
-			+ "p.category_id, "
-			+ "p.banner_id, "
-			+ "p.image, "
+			+ "p.product_name as productName, "
+			+ "p.category_id as categoryId, "
+			+ "p.banner_id as bannerId, "
+			+ "p.image,"
+			+ "p.import_price as importPrice, "
 			+ "p.price, "
 			+ "p.sale, "
 			+ "p.quantity, "
-			+ "p.detail_image, "
+			+ "p.detail_image as detailImage, "
 			+ "p.details, "
-			+ "p.favorite_count, "
+			+ "p.favorite_count as favoriteCount, "
 			+ "p.status, "
 			+ "p.trash, "
-			+ "p.created_at, "
-			+ "SUM(od.quantity) AS total_sold "
+			+ "SUM(od.quantity) AS totalSold "
 			+ "FROM product p "
 			+ "JOIN order_details od ON p.id = od.product_id "
 			+ "GROUP BY p.id, p.product_name, p.price "
-			+ "ORDER BY total_sold DESC "
+			+ "ORDER BY totalSold DESC "
 			+ "LIMIT ?1",
 			nativeQuery = true)
-	List<Product> findBestSellerProducts(Integer limit);
+	List<BestSellerProducts> findBestSellerProducts(Integer limit);
 	
 	@Query(value = "SELECT p.* "
 			+ "FROM product p "
@@ -80,6 +82,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 			+ "p.category_id, "
 			+ "p.banner_id, "
 			+ "p.image, "
+			+ "p.import_price, "
 			+ "p.price, "
 			+ "p.sale, "
 			+ "p.quantity, "

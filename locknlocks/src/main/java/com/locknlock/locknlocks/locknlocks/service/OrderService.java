@@ -1,5 +1,6 @@
 package com.locknlock.locknlocks.locknlocks.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,14 @@ public class OrderService {
 	
 	public List<Order> getListOrder() {
 		return orderRepository.findListOrder();
+	}
+	
+	public List<Order> getListOrderByDate(LocalDate startDate, LocalDate endDate) {
+		return orderRepository.findListOrderByDate(startDate, endDate);
+	}
+	
+	public List<Order> getAllOrder(LocalDate startDate, LocalDate endDate) {
+		return orderRepository.findAllOrder(startDate, endDate);
 	}
 	
 	public List<Order> getConfirmOrder() {
